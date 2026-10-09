@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+@theme {
+  --color-papel: #fbf9f4;
+  --color-tinta: #1d1d1f;
+  --color-noche: #24323f;
+  --color-sube: #1d6b3a;
+  --color-baja: #a3361b;
+  --color-posible: #5b2a72;
+  --color-arena: #e1d9c6;
+}
+
+html, body { background: var(--color-papel); color: var(--color-tinta); }
+.etiqueta { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em; padding:3px 8px; border-radius:6px; text-transform:uppercase; }
+.et-obs { background:#dfe9e2; color:#1d5b3a; }
+.et-pos { background:#efe2f5; color:var(--color-posible); }
+.et-ia { background:#dfe9e2; color:#1d5b3a; text-transform:none; }
+.et-sim { background:#f6e3a1; color:#5a4500; }
+.tarjeta { background:#fff; border:1px solid var(--color-arena); border-radius:14px; padding:12px 14px; }
+.nosabemos { background:#f1ede3; border:1.5px dashed #b9ae95; border-radius:14px; padding:12px 14px; color:#4a4a4a; }
+.ruido { background:#fff6dc; border:1px solid #e0c46a; border-radius:14px; padding:12px 14px; }
+.puerta { background:#fff; border:2px dashed #8a5aa3; border-radius:14px; padding:12px 14px; }
+.puerta-no { background:#f7f3f9; border:1.5px dashed #c9b3d6; border-radius:14px; padding:10px 14px; color:#555; }
+.regla { border:2px solid var(--color-noche); background:#eef2f5; border-radius:14px; padding:12px 14px; }
+.opcion { display:flex; gap:10px; align-items:center; width:100%; text-align:left; min-height:56px; padding:12px 16px; border-radius:18px; border:2px solid var(--color-noche); color:var(--color-noche); font-weight:600; background:#fff; }
+.opcion:hover { background:#eef2f5; }
+.boton { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:10px 18px; border-radius:24px; font-weight:600; background:var(--color-noche); color:#fff; }
+.boton-sec { background:#fff; color:var(--color-noche); border:2px solid var(--color-noche); }
+.boton:disabled { opacity:.45; cursor:not-allowed; }
+.sube { color:var(--color-sube); } .baja { color:var(--color-baja); } .igual { color:#555; }
+.flecha { font-size:26px; font-weight:800; line-height:1; }
+textarea { border:1.5px solid #cfc6b2; border-radius:10px; padding:10px 12px; width:100%; background:#fff; font-size:16px; }
+a.liga { text-decoration:underline; text-underline-offset:3px; }

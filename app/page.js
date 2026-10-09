@@ -1,8 +1,17 @@
-export default function Home() {
+import Elegir from './Elegir'
+
+export default function Inicio() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-2">
-      <h1 className="text-4xl font-bold">🔮 w09-cruce</h1>
-      <p className="opacity-60">Blueprint conditions live in docs/CHARTER.md — read them before building.</p>
-    </main>
+    <div className="space-y-5">
+      <section>
+        <h1 className="text-2xl font-bold leading-tight">Si dejas tu trabajo en el centro de llamadas, ¿a dónde se fueron los que ya lo dejaron?</h1>
+        <p className="mt-2">Con datos del INEGI te mostramos <b>a dónde se movieron</b> personas que hacían tu mismo trabajo, cuánto se gana ahí y si quedaron con o sin prestaciones.</p>
+      </section>
+      <div className="regla text-sm">
+        <b>Lo que este sitio nunca hace:</b> no te dice a dónde deberías irte, no te califica, no te pide tu nombre, no guarda lo que escribes y no publica vacantes.
+        Si los datos dicen que a muchos les fue peor, te lo decimos igual.
+      </div>
+      <Elegir />
+    </div>
   )
 }

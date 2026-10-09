@@ -1,0 +1,764 @@
+{
+ "meta": {
+  "generado": "2026-10-08",
+  "trimestres": [
+   "2024 T1",
+   "2024 T2",
+   "2024 T3",
+   "2024 T4",
+   "2025 T1",
+   "2025 T2",
+   "2025 T3",
+   "2025 T4",
+   "2026 T1",
+   "2026 T2"
+  ],
+  "pares": 9,
+  "minimo_celda": 10,
+  "fuente": "INEGI, ENOE microdatos (CSV), 2024 T1 a 2026 T2",
+  "salarios": "mediana ponderada (fac_tri) de ingocup>0, todos los ocupados en la clave, 2025 T3 a 2026 T2, pesos corrientes al mes"
+ },
+ "origenes": {
+  "3212": {
+   "nombre": "Trabajadores que brindan información por teléfono (centro de llamadas) y anunciadores",
+   "muestra_promedio_trimestre": 226.0,
+   "personas_estimadas": 92500,
+   "elegibles": 1838,
+   "encontrados": 1511,
+   "misma_ocupacion": 334,
+   "sin_trabajo": 212,
+   "cambio_crudo": 965,
+   "cambio_estricto": 573,
+   "destinos": [
+    {
+     "clave": "3213",
+     "nombre": "Telefonistas y telegrafistas",
+     "n": 54,
+     "informal_antes": 0,
+     "informal_despues": 3,
+     "ingreso_pareado": {
+      "n": 21,
+      "sube": 9,
+      "igual": 4,
+      "baja": 8,
+      "mediana_cambio": 0.0
+     }
+    },
+    {
+     "clave": "3211",
+     "nombre": "Recepcionistas y trabajadores que brindan información (de forma personal)",
+     "n": 39,
+     "informal_antes": 8,
+     "informal_despues": 7,
+     "ingreso_pareado": {
+      "n": 11,
+      "sube": 7,
+      "igual": 1,
+      "baja": 3,
+      "mediana_cambio": 0.059
+     }
+    },
+    {
+     "clave": "4222",
+     "nombre": "Agentes de seguros y servicios financieros (ejecutivos de cuenta)",
+     "n": 34,
+     "informal_antes": 2,
+     "informal_despues": 4,
+     "ingreso_pareado": {
+      "n": 17,
+      "sube": 9,
+      "igual": 3,
+      "baja": 5,
+      "mediana_cambio": 0.074
+     }
+    },
+    {
+     "clave": "4213",
+     "nombre": "Vendedores por teléfono",
+     "n": 31,
+     "informal_antes": 6,
+     "informal_despues": 3,
+     "ingreso_pareado": {
+      "n": 5
+     }
+    },
+    {
+     "clave": "4211",
+     "nombre": "Empleados de ventas, despachadores y dependientes en comercios",
+     "n": 30,
+     "informal_antes": 1,
+     "informal_despues": 4,
+     "ingreso_pareado": {
+      "n": 7
+     }
+    },
+    {
+     "clave": "3122",
+     "nombre": "Cobradores, pagadores y prestamistas",
+     "n": 25,
+     "informal_antes": 2,
+     "informal_despues": 1,
+     "ingreso_pareado": {
+      "n": 14,
+      "sube": 5,
+      "igual": 5,
+      "baja": 4,
+      "mediana_cambio": 0.0
+     }
+    },
+    {
+     "clave": "3115",
+     "nombre": "Trabajadores de apoyo en actividades administrativas diversas",
+     "n": 23,
+     "informal_antes": 0,
+     "informal_despues": 2,
+     "ingreso_pareado": {
+      "n": 7
+     }
+    },
+    {
+     "clave": "2511",
+     "nombre": "Auxiliares en administración, mercadotecnia, comercialización y comercio exterior",
+     "n": 18,
+     "informal_antes": 0,
+     "informal_despues": 0,
+     "ingreso_pareado": {
+      "n": 4
+     }
+    },
+    {
+     "clave": "3121",
+     "nombre": "Cajeros, taquilleros, receptores de apuestas y similares",
+     "n": 17,
+     "informal_antes": 3,
+     "informal_despues": 7,
+     "ingreso_pareado": {
+      "n": 5
+     }
+    },
+    {
+     "clave": "2651",
+     "nombre": "Técnicos en la instalación y reparación de redes, equipos y en sistemas computacionales",
+     "n": 16,
+     "informal_antes": 3,
+     "informal_despues": 2,
+     "ingreso_pareado": {
+      "n": 6
+     }
+    },
+    {
+     "clave": "2512",
+     "nombre": "Auxiliares en contabilidad, finanzas y agentes de bolsa",
+     "n": 14,
+     "informal_antes": 1,
+     "informal_despues": 5,
+     "ingreso_pareado": {
+      "n": 6
+     }
+    },
+    {
+     "clave": "3113",
+     "nombre": "Capturistas de datos",
+     "n": 12,
+     "informal_antes": 3,
+     "informal_despues": 2,
+     "ingreso_pareado": {
+      "n": 1
+     }
+    },
+    {
+     "clave": "9512",
+     "nombre": "Vendedores ambulantes de artículos diversos (excluyendo los de venta de alimentos)",
+     "n": 12,
+     "informal_antes": 8,
+     "informal_despues": 9,
+     "ingreso_pareado": {
+      "n": 9
+     }
+    },
+    {
+     "clave": "2271",
+     "nombre": "Desarrolladores y analistas de software y multimedia",
+     "n": 11,
+     "informal_antes": 0,
+     "informal_despues": 1,
+     "ingreso_pareado": {
+      "n": 5
+     }
+    },
+    {
+     "clave": "4111",
+     "nombre": "Comerciantes en establecimientos",
+     "n": 10,
+     "informal_antes": 6,
+     "informal_despues": 7,
+     "ingreso_pareado": {
+      "n": 4
+     }
+    }
+   ],
+   "otros": {
+    "n": 227,
+    "ocupaciones": 98
+   },
+   "informal_antes": 86,
+   "informal_despues": 135,
+   "ingreso_pareado": {
+    "n": 207,
+    "sube": 99,
+    "igual": 30,
+    "baja": 78,
+    "mediana_cambio": 0.013
+   },
+   "control_se_quedaron": {
+    "n": 134,
+    "sube": 59,
+    "igual": 25,
+    "baja": 50,
+    "mediana_cambio": 0.013
+   },
+   "ruido_industria_en_los_que_se_quedaron": 0.368,
+   "personas_distintas_que_cruzaron": 455
+  },
+  "4213": {
+   "nombre": "Vendedores por teléfono",
+   "muestra_promedio_trimestre": 122.0,
+   "personas_estimadas": 45100,
+   "elegibles": 1001,
+   "encontrados": 824,
+   "misma_ocupacion": 60,
+   "sin_trabajo": 148,
+   "cambio_crudo": 616,
+   "cambio_estricto": 363,
+   "destinos": [
+    {
+     "clave": "4211",
+     "nombre": "Empleados de ventas, despachadores y dependientes en comercios",
+     "n": 57,
+     "informal_antes": 14,
+     "informal_despues": 15,
+     "ingreso_pareado": {
+      "n": 20,
+      "sube": 11,
+      "igual": 1,
+      "baja": 8,
+      "mediana_cambio": 0.145
+     }
+    },
+    {
+     "clave": "3212",
+     "nombre": "Trabajadores que brindan información por teléfono (centro de llamadas) y anunciadores",
+     "n": 40,
+     "informal_antes": 6,
+     "informal_despues": 4,
+     "ingreso_pareado": {
+      "n": 6
+     }
+    },
+    {
+     "clave": "3213",
+     "nombre": "Telefonistas y telegrafistas",
+     "n": 25,
+     "informal_antes": 5,
+     "informal_despues": 5,
+     "ingreso_pareado": {
+      "n": 10,
+      "sube": 4,
+      "igual": 1,
+      "baja": 5,
+      "mediana_cambio": -0.121
+     }
+    },
+    {
+     "clave": "4221",
+     "nombre": "Agentes y representantes de ventas y consignatarios",
+     "n": 18,
+     "informal_antes": 2,
+     "informal_despues": 3,
+     "ingreso_pareado": {
+      "n": 8
+     }
+    },
+    {
+     "clave": "3211",
+     "nombre": "Recepcionistas y trabajadores que brindan información (de forma personal)",
+     "n": 11,
+     "informal_antes": 0,
+     "informal_despues": 2,
+     "ingreso_pareado": {
+      "n": 2
+     }
+    },
+    {
+     "clave": "3115",
+     "nombre": "Trabajadores de apoyo en actividades administrativas diversas",
+     "n": 10,
+     "informal_antes": 3,
+     "informal_despues": 3,
+     "ingreso_pareado": {
+      "n": 0
+     }
+    }
+   ],
+   "otros": {
+    "n": 202,
+    "ocupaciones": 75
+   },
+   "informal_antes": 86,
+   "informal_despues": 97,
+   "ingreso_pareado": {
+    "n": 113,
+    "sube": 50,
+    "igual": 13,
+    "baja": 50,
+    "mediana_cambio": 0.0
+   },
+   "control_se_quedaron": {
+    "n": 22,
+    "sube": 11,
+    "igual": 3,
+    "baja": 8,
+    "mediana_cambio": 0.052
+   },
+   "ruido_industria_en_los_que_se_quedaron": 0.367,
+   "personas_distintas_que_cruzaron": 289
+  },
+  "3122": {
+   "nombre": "Cobradores, pagadores y prestamistas",
+   "muestra_promedio_trimestre": 427.9,
+   "personas_estimadas": 121700,
+   "elegibles": 3572,
+   "encontrados": 3054,
+   "misma_ocupacion": 854,
+   "sin_trabajo": 458,
+   "cambio_crudo": 1742,
+   "cambio_estricto": 861,
+   "destinos": [
+    {
+     "clave": "3115",
+     "nombre": "Trabajadores de apoyo en actividades administrativas diversas",
+     "n": 72,
+     "informal_antes": 8,
+     "informal_despues": 13,
+     "ingreso_pareado": {
+      "n": 30,
+      "sube": 14,
+      "igual": 5,
+      "baja": 11,
+      "mediana_cambio": 0.0
+     }
+    },
+    {
+     "clave": "8344",
+     "nombre": "Conductores de motocicleta",
+     "n": 70,
+     "informal_antes": 22,
+     "informal_despues": 24,
+     "ingreso_pareado": {
+      "n": 31,
+      "sube": 17,
+      "igual": 4,
+      "baja": 10,
+      "mediana_cambio": 0.2
+     }
+    },
+    {
+     "clave": "4211",
+     "nombre": "Empleados de ventas, despachadores y dependientes en comercios",
+     "n": 57,
+     "informal_antes": 25,
+     "informal_despues": 27,
+     "ingreso_pareado": {
+      "n": 19,
+      "sube": 9,
+      "igual": 3,
+      "baja": 7,
+      "mediana_cambio": 0.0
+     }
+    },
+    {
+     "clave": "2512",
+     "nombre": "Auxiliares en contabilidad, finanzas y agentes de bolsa",
+     "n": 35,
+     "informal_antes": 4,
+     "informal_despues": 6,
+     "ingreso_pareado": {
+      "n": 13,
+      "sube": 5,
+      "igual": 3,
+      "baja": 5,
+      "mediana_cambio": 0.0
+     }
+    },
+    {
+     "clave": "4111",
+     "nombre": "Comerciantes en establecimientos",
+     "n": 31,
+     "informal_antes": 22,
+     "informal_despues": 23,
+     "ingreso_pareado": {
+      "n": 11,
+      "sube": 4,
+      "igual": 2,
+      "baja": 5,
+      "mediana_cambio": 0.0
+     }
+    },
+    {
+     "clave": "4222",
+     "nombre": "Agentes de seguros y servicios financieros (ejecutivos de cuenta)",
+     "n": 29,
+     "informal_antes": 11,
+     "informal_despues": 4,
+     "ingreso_pareado": {
+      "n": 5
+     }
+    },
+    {
+     "clave": "3121",
+     "nombre": "Cajeros, taquilleros, receptores de apuestas y similares",
+     "n": 27,
+     "informal_antes": 11,
+     "informal_despues": 6,
+     "ingreso_pareado": {
+      "n": 14,
+      "sube": 9,
+      "igual": 3,
+      "baja": 2,
+      "mediana_cambio": 0.16
+     }
+    },
+    {
+     "clave": "2135",
+     "nombre": "Abogados",
+     "n": 24,
+     "informal_antes": 3,
+     "informal_despues": 2,
+     "ingreso_pareado": {
+      "n": 13,
+      "sube": 4,
+      "igual": 2,
+      "baja": 7,
+      "mediana_cambio": -0.16
+     }
+    },
+    {
+     "clave": "2511",
+     "nombre": "Auxiliares en administración, mercadotecnia, comercialización y comercio exterior",
+     "n": 23,
+     "informal_antes": 3,
+     "informal_despues": 3,
+     "ingreso_pareado": {
+      "n": 9
+     }
+    },
+    {
+     "clave": "3211",
+     "nombre": "Recepcionistas y trabajadores que brindan información (de forma personal)",
+     "n": 23,
+     "informal_antes": 5,
+     "informal_despues": 7,
+     "ingreso_pareado": {
+      "n": 8
+     }
+    },
+    {
+     "clave": "9611",
+     "nombre": "Trabajadores domésticos",
+     "n": 23,
+     "informal_antes": 12,
+     "informal_despues": 18,
+     "ingreso_pareado": {
+      "n": 15,
+      "sube": 3,
+      "igual": 1,
+      "baja": 11,
+      "mediana_cambio": -0.25
+     }
+    },
+    {
+     "clave": "3111",
+     "nombre": "Secretarias",
+     "n": 15,
+     "informal_antes": 1,
+     "informal_despues": 3,
+     "ingreso_pareado": {
+      "n": 5
+     }
+    },
+    {
+     "clave": "8341",
+     "nombre": "Conductores de camiones, camionetas y automóviles de carga",
+     "n": 14,
+     "informal_antes": 4,
+     "informal_despues": 3,
+     "ingreso_pareado": {
+      "n": 2
+     }
+    },
+    {
+     "clave": "3212",
+     "nombre": "Trabajadores que brindan información por teléfono (centro de llamadas) y anunciadores",
+     "n": 14,
+     "informal_antes": 1,
+     "informal_despues": 0,
+     "ingreso_pareado": {
+      "n": 6
+     }
+    },
+    {
+     "clave": "2121",
+     "nombre": "Contadores y audit ores",
+     "n": 13,
+     "informal_antes": 1,
+     "informal_despues": 1,
+     "ingreso_pareado": {
+      "n": 5
+     }
+    },
+    {
+     "clave": "3101",
+     "nombre": "Supervisores de secretarias, capturistas, cajeros y trabajadores de control de archivo y transporte",
+     "n": 13,
+     "informal_antes": 3,
+     "informal_despues": 2,
+     "ingreso_pareado": {
+      "n": 3
+     }
+    },
+    {
+     "clave": "7513",
+     "nombre": "Trabajadores en la elaboración de pan, tortilla, repostería, y otros productos de cereales y harinas",
+     "n": 11,
+     "informal_antes": 1,
+     "informal_despues": 5,
+     "ingreso_pareado": {
+      "n": 6
+     }
+    },
+    {
+     "clave": "9621",
+     "nombre": "Barrenderos y trabajadores de limpieza (excepto en hoteles y restaurantes)",
+     "n": 11,
+     "informal_antes": 5,
+     "informal_despues": 4,
+     "ingreso_pareado": {
+      "n": 7
+     }
+    },
+    {
+     "clave": "2715",
+     "nombre": "Instructores y capacitadores en oficios y para el trabajo",
+     "n": 11,
+     "informal_antes": 5,
+     "informal_despues": 5,
+     "ingreso_pareado": {
+      "n": 7
+     }
+    },
+    {
+     "clave": "8211",
+     "nombre": "Ensambladores y montadores de herramientas, maquinaria, equipos y productos metálicos",
+     "n": 10,
+     "informal_antes": 0,
+     "informal_despues": 0,
+     "ingreso_pareado": {
+      "n": 2
+     }
+    }
+   ],
+   "otros": {
+    "n": 335,
+    "ocupaciones": 115
+   },
+   "informal_antes": 273,
+   "informal_despues": 290,
+   "ingreso_pareado": {
+    "n": 346,
+    "sube": 157,
+    "igual": 48,
+    "baja": 141,
+    "mediana_cambio": 0.0
+   },
+   "control_se_quedaron": {
+    "n": 424,
+    "sube": 176,
+    "igual": 90,
+    "baja": 158,
+    "mediana_cambio": 0.0
+   },
+   "ruido_industria_en_los_que_se_quedaron": 0.279,
+   "personas_distintas_que_cruzaron": 649
+  }
+ },
+ "salarios": {
+  "2121": {
+   "nombre": "Contadores y audit ores",
+   "mediana": 17200,
+   "n_con_ingreso": 3077,
+   "n": 6617
+  },
+  "2135": {
+   "nombre": "Abogados",
+   "mediana": 18000,
+   "n_con_ingreso": 2452,
+   "n": 5860
+  },
+  "2271": {
+   "nombre": "Desarrolladores y analistas de software y multimedia",
+   "mediana": 18700,
+   "n_con_ingreso": 2167,
+   "n": 4407
+  },
+  "2511": {
+   "nombre": "Auxiliares en administración, mercadotecnia, comercialización y comercio exterior",
+   "mediana": 13000,
+   "n_con_ingreso": 4123,
+   "n": 7885
+  },
+  "2512": {
+   "nombre": "Auxiliares en contabilidad, finanzas y agentes de bolsa",
+   "mediana": 12000,
+   "n_con_ingreso": 3083,
+   "n": 5626
+  },
+  "2651": {
+   "nombre": "Técnicos en la instalación y reparación de redes, equipos y en sistemas computacionales",
+   "mediana": 12900,
+   "n_con_ingreso": 1029,
+   "n": 1880
+  },
+  "2715": {
+   "nombre": "Instructores y capacitadores en oficios y para el trabajo",
+   "mediana": 12000,
+   "n_con_ingreso": 648,
+   "n": 1026
+  },
+  "3101": {
+   "nombre": "Supervisores de secretarias, capturistas, cajeros y trabajadores de control de archivo y transporte",
+   "mediana": 13760,
+   "n_con_ingreso": 1298,
+   "n": 2096
+  },
+  "3111": {
+   "nombre": "Secretarias",
+   "mediana": 10600,
+   "n_con_ingreso": 3615,
+   "n": 6391
+  },
+  "3113": {
+   "nombre": "Capturistas de datos",
+   "mediana": 12000,
+   "n_con_ingreso": 1650,
+   "n": 2713
+  },
+  "3115": {
+   "nombre": "Trabajadores de apoyo en actividades administrativas diversas",
+   "mediana": 12000,
+   "n_con_ingreso": 8465,
+   "n": 16933
+  },
+  "3121": {
+   "nombre": "Cajeros, taquilleros, receptores de apuestas y similares",
+   "mediana": 9000,
+   "n_con_ingreso": 7188,
+   "n": 10742
+  },
+  "3122": {
+   "nombre": "Cobradores, pagadores y prestamistas",
+   "mediana": 10714,
+   "n_con_ingreso": 1100,
+   "n": 1720
+  },
+  "3211": {
+   "nombre": "Recepcionistas y trabajadores que brindan información (de forma personal)",
+   "mediana": 10000,
+   "n_con_ingreso": 2892,
+   "n": 4836
+  },
+  "3212": {
+   "nombre": "Trabajadores que brindan información por teléfono (centro de llamadas) y anunciadores",
+   "mediana": 11000,
+   "n_con_ingreso": 498,
+   "n": 929
+  },
+  "3213": {
+   "nombre": "Telefonistas y telegrafistas",
+   "mediana": 12000,
+   "n_con_ingreso": 490,
+   "n": 806
+  },
+  "4111": {
+   "nombre": "Comerciantes en establecimientos",
+   "mediana": 6450,
+   "n_con_ingreso": 21135,
+   "n": 36477
+  },
+  "4211": {
+   "nombre": "Empleados de ventas, despachadores y dependientes en comercios",
+   "mediana": 7740,
+   "n_con_ingreso": 27608,
+   "n": 48728
+  },
+  "4213": {
+   "nombre": "Vendedores por teléfono",
+   "mediana": 11000,
+   "n_con_ingreso": 270,
+   "n": 497
+  },
+  "4221": {
+   "nombre": "Agentes y representantes de ventas y consignatarios",
+   "mediana": 12000,
+   "n_con_ingreso": 2757,
+   "n": 4821
+  },
+  "4222": {
+   "nombre": "Agentes de seguros y servicios financieros (ejecutivos de cuenta)",
+   "mediana": 13000,
+   "n_con_ingreso": 1549,
+   "n": 2862
+  },
+  "7513": {
+   "nombre": "Trabajadores en la elaboración de pan, tortilla, repostería, y otros productos de cereales y harinas",
+   "mediana": 6450,
+   "n_con_ingreso": 9431,
+   "n": 12746
+  },
+  "8211": {
+   "nombre": "Ensambladores y montadores de herramientas, maquinaria, equipos y productos metálicos",
+   "mediana": 10750,
+   "n_con_ingreso": 4379,
+   "n": 6510
+  },
+  "8341": {
+   "nombre": "Conductores de camiones, camionetas y automóviles de carga",
+   "mediana": 12040,
+   "n_con_ingreso": 10553,
+   "n": 16860
+  },
+  "8344": {
+   "nombre": "Conductores de motocicleta",
+   "mediana": 8600,
+   "n_con_ingreso": 4214,
+   "n": 5827
+  },
+  "9512": {
+   "nombre": "Vendedores ambulantes de artículos diversos (excluyendo los de venta de alimentos)",
+   "mediana": 5000,
+   "n_con_ingreso": 5307,
+   "n": 8547
+  },
+  "9611": {
+   "nombre": "Trabajadores domésticos",
+   "mediana": 5160,
+   "n_con_ingreso": 20882,
+   "n": 25052
+  },
+  "9621": {
+   "nombre": "Barrenderos y trabajadores de limpieza (excepto en hoteles y restaurantes)",
+   "mediana": 8400,
+   "n_con_ingreso": 11584,
+   "n": 15918
+  }
+ }
+}
