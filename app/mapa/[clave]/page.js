@@ -15,6 +15,7 @@ export async function generateMetadata({ params }) {
 }
 
 const pct = x => `${Math.round(x * 100)}%`
+const personas = n => `${n} ${n === 1 ? 'persona' : 'personas'}`
 // INEGI names are long ("Telefonistas y telegrafistas"); the summary uses the first part.
 const corto = n => n.split(/,| y | \(/)[0].trim().toLowerCase()
 
@@ -35,7 +36,7 @@ function Tarjeta({ d, o, salOrigen }) {
       {sal && (
         <p className="text-sm">Sueldo típico de todos los que trabajan ahí: {pesos(sal)} al mes{f && <> <span className={`font-bold ${f.clase}`} aria-label={f.texto}>{f.simbolo} {f.texto} que en tu trabajo</span></>}</p>
       )}
-      <p className="text-sm">Sin prestaciones: {d.informal_antes} personas antes de cambiar → <b>{d.informal_despues} personas</b> después</p>
+      <p className="text-sm">Sin prestaciones: {personas(d.informal_antes)} antes de cambiar → <b>{personas(d.informal_despues)}</b> después</p>
       <Ingreso p={d.ingreso_pareado} />
     </li>
   )
@@ -45,7 +46,7 @@ function Ingreso({ p }) {
   if (!p || celda(p.n) !== 'visible') {
     return <p className="text-xs text-neutral-600">¿A ellas mismas les subió o bajó el sueldo al cambiar? No sabemos: muy pocas dijeron cuánto ganaban.</p>
   }
-  return <p className="text-xs text-neutral-700">A ellas mismas, al cambiar (de {p.n} que dijeron cuánto ganaban): {p.sube} ganaron más, {p.igual} igual, {p.baja} ganaron menos.</p>
+  return <p className="mt-1 rounded-lg bg-neutral-100 px-2 py-1 text-xs text-neutral-800"><b>Lo que les pasó a ellas al cambiar</b> (de {p.n} que dijeron cuánto ganaban): {p.sube} ganaron más, {p.igual} igual, {p.baja} ganaron menos.</p>
 }
 
 export default async function Mapa({ params }) {
@@ -74,7 +75,7 @@ export default async function Mapa({ params }) {
         )}
         <p><b>Prestaciones:</b> {o.informal_despues > o.informal_antes ? 'más personas quedaron sin prestaciones' : 'no aumentaron los que quedaron sin prestaciones'}: antes de cambiar, {o.informal_antes} de {o.cambio_estricto} no tenían (un {pct(o.informal_antes / o.cambio_estricto)}); después, <b>{o.informal_despues} ({pct(o.informal_despues / o.cambio_estricto)})</b>.</p>
         {visibles.length > 0 && <p><b>A dónde:</b> los cambios más comunes fueron a {visibles.slice(0, 3).map(d => `${corto(d.nombre)} (${d.n})`).join(', ')}. Muchos otros no los podemos contar bien.</p>}
-        {pruebas.length > 0 && <p><b>Lo que existe hoy para ti:</b> un certificado oficial de lo que ya sabes hacer ({pruebas.map(p => p.codigo).join(' o ')}). Está hasta abajo.</p>}
+        {pruebas.length > 0 && <p><b>Lo que existe hoy para ti:</b> un certificado oficial del gobierno de lo que ya sabes hacer. <a href="#prueba" className="liga font-semibold">Cómo sacar tu certificado de {pruebas[0].titulo.toLowerCase()} ↓</a></p>}
       </section>
 
       {/* ===== OBSERVED LAYER ===== */}
@@ -84,8 +85,8 @@ export default async function Mapa({ params }) {
         <p className="text-sm">
           El INEGI entrevista a las mismas personas cada 3 meses. Entre 2024 y 2026 vimos <b>{o.cambio_estricto.toLocaleString('es-MX')} veces</b> que alguien de tu trabajo se cambió a otro trabajo, en otro tipo de empresa.
         </p>
-        <details className="text-xs text-neutral-700">
-          <summary className="cursor-pointer">¿Y los demás?</summary>
+        <details className="tarjeta text-sm">
+          <summary className="cursor-pointer font-semibold">¿Y los que no se cambiaron? ¿Cuántos se quedaron sin trabajo?</summary>
           De {o.encontrados.toLocaleString('es-MX')} veces que volvimos a encontrar a alguien: {o.misma_ocupacion.toLocaleString('es-MX')} seguían en lo mismo, {o.sin_trabajo.toLocaleString('es-MX')} estaban sin trabajo esa semana,
           {' '}{soloPuesto.toLocaleString('es-MX')} cambiaron solo el nombre del puesto (casi seguro, el mismo trabajo) y {o.cambio_estricto.toLocaleString('es-MX')} cambiaron de verdad.
         </details>
@@ -115,6 +116,31 @@ export default async function Mapa({ params }) {
         <p className="text-xs text-neutral-600">El “sueldo típico” es de todos los que trabajan en ese destino, no lo que tú ganarías. Los destinos están ordenados por cuántas personas se fueron ahí, no por sueldo.</p>
       </section>
 
+      <section className="space-y-3" data-capa="prueba" id="prueba">
+        <h2 className="text-xl font-bold">Lleva tu prueba contigo</h2>
+        {pruebas.length === 0
+          ? <p className="puerta-no text-sm">Para este trabajo no verificamos un certificado oficial. No lo mostramos.</p>
+          : <>
+              <p className="text-sm">CONOCER es el organismo del gobierno federal que certifica lo que la gente sabe hacer en su trabajo. Estos son certificados oficiales de lo que <b>ya sabes hacer</b>. Te evalúa una persona que te ve trabajar, no un examen que una IA pueda contestar por ti. Lo puedes sacar mientras todavía tienes trabajo.</p>
+              {pruebas.map(p => (
+                <div key={p.codigo} className="tarjeta text-sm" data-prueba={p.codigo}>
+                  <p className="font-semibold">{p.codigo} · {p.titulo}</p>
+                  <p>{p.detalle}</p>
+                  <p className="mt-1 text-xs" style={{ color: 'var(--color-posible)' }}>Fuente: <a className="liga" href={p.fuente.url} target="_blank" rel="noopener noreferrer">{p.fuente.nombre}</a> · verificado el {p.verificado}</p>
+                </div>
+              ))}
+              <div className="tarjeta text-sm">
+                <p className="font-semibold">Cómo empezar</p>
+                <ol className="list-decimal pl-5">
+                  <li>Pregunta en un centro evaluador autorizado (por ejemplo, el CONALEP o el ICAT de tu ciudad) por el código del certificado: {pruebas.map(p => p.codigo).join(' o ')}.</li>
+                  <li>Pide el costo y la fecha: cambia según el centro. Un centro cobraba MX$4,800 por el EC0305 en 2023 (curso + evaluación + certificado); no verificamos precios de 2026.</li>
+                  <li>Puedes hacerlo mientras todavía tienes trabajo.</li>
+                </ol>
+                <p className="mt-1 text-xs" style={{ color: 'var(--color-posible)' }}>Fuente del precio: <a className="liga" href="https://ceune.unach.mx/images/ECE/preciosdeestandareseceunach2023.pdf" target="_blank" rel="noopener noreferrer">ECE-UNACH, precios de estándares 2023</a></p>
+              </div>
+            </>}
+      </section>
+
       {/* ===== POSSIBLE LAYER — never borrows the observed layer's numbers ===== */}
       <section className="space-y-3" data-capa="posible">
         <span className="etiqueta et-pos">Camino posible, no observado</span>
@@ -139,22 +165,6 @@ export default async function Mapa({ params }) {
         })}
       </section>
 
-      <section className="space-y-3" data-capa="prueba">
-        <h2 className="text-xl font-bold">Lleva tu prueba contigo</h2>
-        {pruebas.length === 0
-          ? <p className="puerta-no text-sm">Para este trabajo no verificamos un certificado oficial. No lo mostramos.</p>
-          : <>
-              <p className="text-sm">CONOCER es el organismo del gobierno federal que certifica lo que la gente sabe hacer en su trabajo. Estos son certificados oficiales de lo que <b>ya sabes hacer</b>. Te evalúa una persona que te ve trabajar, no un examen que una IA pueda contestar por ti. Lo puedes sacar mientras todavía tienes trabajo.</p>
-              {pruebas.map(p => (
-                <div key={p.codigo} className="tarjeta text-sm" data-prueba={p.codigo}>
-                  <p className="font-semibold">{p.codigo} · {p.titulo}</p>
-                  <p>{p.detalle}</p>
-                  <p className="mt-1 text-xs" style={{ color: 'var(--color-posible)' }}>Fuente: <a className="liga" href={p.fuente.url} target="_blank" rel="noopener noreferrer">{p.fuente.nombre}</a> · verificado el {p.verificado}</p>
-                </div>
-              ))}
-              <p className="text-xs text-neutral-600">Dónde y cuánto: lo hacen centros evaluadores autorizados (CONALEP, ICATs, universidades); el costo cambia según el centro y no lo verificamos para 2026.</p>
-            </>}
-      </section>
     </div>
   )
 }
