@@ -34,6 +34,7 @@ export default function Elegir() {
         <textarea id="desc" rows={3} maxLength={400} value={texto} onChange={e => setTexto(e.target.value)}
           placeholder="Ej.: contesto llamadas de clientes por cambios de plan y aclaraciones de cobro" />
         <p className="text-xs text-neutral-600">No escribas tu nombre, tu empresa ni números. No guardamos lo que escribes. Quitamos los números antes de usarlo.</p>
+        {texto.trim().length < 10 && <p className="text-xs text-neutral-600">Escribe al menos 10 letras para activar el botón.</p>}
         <button className="boton" disabled={texto.trim().length < 10 || estado === 'pensando'}>{estado === 'pensando' ? 'Pensando…' : 'Sugiéreme una opción'}</button>
       </form>
 

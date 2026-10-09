@@ -15,12 +15,37 @@ export async function generateMetadata({ params }) {
 }
 
 const pct = x => `${Math.round(x * 100)}%`
+// INEGI names are long ("Telefonistas y telegrafistas"); the summary uses the first part.
+const corto = n => n.split(/,| y | \(/)[0].trim().toLowerCase()
+
+function resumenSueldo(o) {
+  const m = o.ingreso_pareado.mediana_cambio, c = o.control_se_quedaron.mediana_cambio
+  const signo = x => `${x >= 0 ? '+' : ''}${pct(x)}`
+  const igual = Math.abs(m - c) <= 0.03
+  return `${igual ? 'en general les fue igual que a quienes se quedaron' : m > c ? 'en general ganaron un poco más que quienes se quedaron' : 'en general ganaron menos que quienes se quedaron'}. De las ${o.ingreso_pareado.n} que dijeron cuánto ganaban antes y después, el cambio típico fue ${signo(m)}; de las ${o.control_se_quedaron.n} que se quedaron, ${signo(c)}.`
+}
+
+function Tarjeta({ d, o, salOrigen }) {
+  const sal = datos.salarios[d.clave]?.mediana
+  const f = flecha(sal, salOrigen)
+  return (
+    <li className="tarjeta" data-destino={d.clave}>
+      <p className="font-semibold">{d.nombre}</p>
+      <p className="text-sm"><b>{d.n}</b> de {o.cambio_estricto} cambios se fueron aquí</p>
+      {sal && (
+        <p className="text-sm">Sueldo típico de todos los que trabajan ahí: {pesos(sal)} al mes{f && <> <span className={`font-bold ${f.clase}`} aria-label={f.texto}>{f.simbolo} {f.texto} que en tu trabajo</span></>}</p>
+      )}
+      <p className="text-sm">Sin prestaciones: {d.informal_antes} personas antes de cambiar → <b>{d.informal_despues} personas</b> después</p>
+      <Ingreso p={d.ingreso_pareado} />
+    </li>
+  )
+}
 
 function Ingreso({ p }) {
   if (!p || celda(p.n) !== 'visible') {
-    return <p className="text-xs text-neutral-600">¿Les subió o bajó el ingreso? No sabemos: muy pocas personas dijeron su ingreso antes y después.</p>
+    return <p className="text-xs text-neutral-600">¿A ellas mismas les subió o bajó el sueldo al cambiar? No sabemos: muy pocas dijeron cuánto ganaban.</p>
   }
-  return <p className="text-xs text-neutral-700">De {p.n} que dijeron su ingreso antes y después: <b className="sube">{p.sube} ganaron más</b>, {p.igual} igual, <b className="baja">{p.baja} ganaron menos</b>.</p>
+  return <p className="text-xs text-neutral-700">A ellas mismas, al cambiar (de {p.n} que dijeron cuánto ganaban): {p.sube} ganaron más, {p.igual} igual, {p.baja} ganaron menos.</p>
 }
 
 export default async function Mapa({ params }) {
@@ -41,64 +66,60 @@ export default async function Mapa({ params }) {
         {salOrigen && <p className="mt-2">En tu trabajo, el sueldo típico es <b>{pesos(salOrigen)} al mes</b>.</p>}
       </section>
 
+      {/* Persona test round 1 (Marisol): she quit at screen 6; the answer to HER question was at the bottom. Now it's first. */}
+      <section className="regla space-y-2" data-testid="en-corto">
+        <h2 className="text-lg font-bold">En corto: ¿a los que se fueron les fue mejor o peor?</h2>
+        {o.ingreso_pareado && o.control_se_quedaron && (
+          <p><b>Sueldo:</b> {resumenSueldo(o)}</p>
+        )}
+        <p><b>Prestaciones:</b> {o.informal_despues > o.informal_antes ? 'más personas quedaron sin prestaciones' : 'no aumentaron los que quedaron sin prestaciones'}: antes de cambiar, {o.informal_antes} de {o.cambio_estricto} no tenían (un {pct(o.informal_antes / o.cambio_estricto)}); después, <b>{o.informal_despues} ({pct(o.informal_despues / o.cambio_estricto)})</b>.</p>
+        {visibles.length > 0 && <p><b>A dónde:</b> los cambios más comunes fueron a {visibles.slice(0, 3).map(d => `${corto(d.nombre)} (${d.n})`).join(', ')}. Muchos otros no los podemos contar bien.</p>}
+        {pruebas.length > 0 && <p><b>Lo que existe hoy para ti:</b> un certificado oficial de lo que ya sabes hacer ({pruebas.map(p => p.codigo).join(' o ')}). Está hasta abajo.</p>}
+      </section>
+
       {/* ===== OBSERVED LAYER ===== */}
       <section className="space-y-3" data-capa="observado">
         <span className="etiqueta et-obs">Observado · INEGI ENOE 2024–2026</span>
         <h2 className="text-xl font-bold">A dónde se fueron</h2>
         <p className="text-sm">
-          El INEGI entrevista a las mismas personas cada 3 meses. Las buscamos otra vez 3 meses después ({o.encontrados.toLocaleString('es-MX')} veces entre 2024 y 2026):
-          {' '}{o.misma_ocupacion.toLocaleString('es-MX')} seguían en lo mismo, {o.sin_trabajo.toLocaleString('es-MX')} estaban sin trabajo,
-          {' '}{soloPuesto.toLocaleString('es-MX')} cambiaron solo el nombre del puesto (casi seguro, el mismo trabajo) y
-          {' '}<b>{o.cambio_estricto.toLocaleString('es-MX')} cambiaron de trabajo y de tipo de empresa</b>. Esos son los cambios de abajo.
+          El INEGI entrevista a las mismas personas cada 3 meses. Entre 2024 y 2026 vimos <b>{o.cambio_estricto.toLocaleString('es-MX')} veces</b> que alguien de tu trabajo se cambió a otro trabajo, en otro tipo de empresa.
         </p>
+        <details className="text-xs text-neutral-700">
+          <summary className="cursor-pointer">¿Y los demás?</summary>
+          De {o.encontrados.toLocaleString('es-MX')} veces que volvimos a encontrar a alguien: {o.misma_ocupacion.toLocaleString('es-MX')} seguían en lo mismo, {o.sin_trabajo.toLocaleString('es-MX')} estaban sin trabajo esa semana,
+          {' '}{soloPuesto.toLocaleString('es-MX')} cambiaron solo el nombre del puesto (casi seguro, el mismo trabajo) y {o.cambio_estricto.toLocaleString('es-MX')} cambiaron de verdad.
+        </details>
 
         <div className="ruido text-sm" data-testid="ruido">
-          <b>⚠️ Cuidado, hay ruido.</b> Entre quienes siguieron en el mismo trabajo, {pct(o.ruido_industria_en_los_que_se_quedaron)} aparecen con otro tipo de empresa de una entrevista a la siguiente.
-          O sea, el INEGI a veces anota distinto el mismo trabajo, y parte de los cambios de abajo puede no ser un cambio real.
+          <b>Ojo:</b> el INEGI a veces anota distinto el mismo trabajo (le pasó al {pct(o.ruido_industria_en_los_que_se_quedaron)} de quienes no se movieron).
+          Por eso algunos de estos cambios pueden no ser reales, y por eso solo mostramos destinos con 10 casos o más.
         </div>
 
         <ol className="space-y-2">
-          {visibles.map(d => {
-            const f = flecha(datos.salarios[d.clave]?.mediana, salOrigen)
-            return (
-              <li key={d.clave} className="tarjeta" data-destino={d.clave}>
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="font-semibold">{d.nombre}</p>
-                    <p className="text-sm"><b>{d.n}</b> de {o.cambio_estricto} cambios</p>
-                    {datos.salarios[d.clave]?.mediana && (
-                      <p className="text-sm">Sueldo típico ahí: {pesos(datos.salarios[d.clave].mediana)} al mes{f && <> · <span className={f.clase}>{f.texto} que en tu trabajo</span></>}</p>
-                    )}
-                    <p className="text-sm">Sin prestaciones (informal): {d.informal_antes} antes → <b>{d.informal_despues}</b> después</p>
-                    <Ingreso p={d.ingreso_pareado} />
-                  </div>
-                  {f && <span className={`flecha ${f.clase}`} aria-label={f.texto}>{f.simbolo}</span>}
-                </div>
-              </li>
-            )
-          })}
+          {visibles.slice(0, 5).map(d => <Tarjeta key={d.clave} d={d} o={o} salOrigen={salOrigen} />)}
         </ol>
+        {visibles.length > 5 && (
+          <details className="tarjeta">
+            <summary className="cursor-pointer font-semibold">Ver los otros {visibles.length - 5} destinos con 10 casos o más</summary>
+            <ol className="mt-2 space-y-2">
+              {visibles.slice(5).map(d => <Tarjeta key={d.clave} d={d} o={o} salOrigen={salOrigen} />)}
+            </ol>
+          </details>
+        )}
 
         <div className="nosabemos" data-testid="no-sabemos">
           <b>No sabemos:</b> {o.otros.n} cambios más se repartieron en {o.otros.ocupaciones} trabajos distintos, con menos de {MINIMO} casos cada uno.
           Con tan pocos casos no mostramos sueldo ni flecha. Que haya tantos huecos también es un dato: en México casi no hay registro de a dónde se va la gente de este trabajo.
         </div>
 
-        <div className="tarjeta text-sm">
-          <p><b>En total, sin prestaciones (informal):</b> {o.informal_antes} de {o.cambio_estricto} antes de cambiar → <b>{o.informal_despues}</b> después.</p>
-          {o.ingreso_pareado && o.control_se_quedaron && (
-            <p className="mt-1">Ingreso de quienes cambiaron y lo dijeron antes y después ({o.ingreso_pareado.n}): cambio típico {o.ingreso_pareado.mediana_cambio >= 0 ? '+' : ''}{pct(o.ingreso_pareado.mediana_cambio)}.
-              Los que se quedaron ({o.control_se_quedaron.n}): {o.control_se_quedaron.mediana_cambio >= 0 ? '+' : ''}{pct(o.control_se_quedaron.mediana_cambio)}.</p>
-          )}
-          <p className="mt-1 text-xs text-neutral-600">La flecha compara el sueldo típico de todos los que trabajan en ese destino con el de tu trabajo. No es lo que tú ganarías. Están ordenados por cuántas personas se fueron ahí, no por sueldo.</p>
-        </div>
+        <p className="text-xs text-neutral-600">El “sueldo típico” es de todos los que trabajan en ese destino, no lo que tú ganarías. Los destinos están ordenados por cuántas personas se fueron ahí, no por sueldo.</p>
       </section>
 
       {/* ===== POSSIBLE LAYER — never borrows the observed layer's numbers ===== */}
       <section className="space-y-3" data-capa="posible">
         <span className="etiqueta et-pos">Camino posible, no observado</span>
-        <h2 className="text-xl font-bold">Qué puerta hay que cruzar</h2>
-        <p className="text-sm">Requisitos y certificados para algunos trabajos. Esto no son datos de a dónde fue la gente: son reglas que revisamos a mano, con su fuente.</p>
+        <h2 className="text-xl font-bold">Requisitos para entrar a algunos de estos trabajos</h2>
+        <p className="text-sm">Esto no son datos de a dónde fue la gente: son reglas y certificados que revisamos a mano. Cada uno dice de dónde lo sacamos.</p>
         {PUERTAS_ORDEN.map(c => {
           const p = PUERTAS[c]
           if (!p.verificada) return (
@@ -123,7 +144,7 @@ export default async function Mapa({ params }) {
         {pruebas.length === 0
           ? <p className="puerta-no text-sm">Para este trabajo no verificamos un certificado oficial. No lo mostramos.</p>
           : <>
-              <p className="text-sm">Certificados oficiales (CONOCER) de lo que <b>ya sabes hacer</b>. Te evalúa una persona que te ve trabajar, no un examen que una IA pueda contestar por ti. Lo puedes sacar mientras todavía tienes trabajo.</p>
+              <p className="text-sm">CONOCER es el organismo del gobierno federal que certifica lo que la gente sabe hacer en su trabajo. Estos son certificados oficiales de lo que <b>ya sabes hacer</b>. Te evalúa una persona que te ve trabajar, no un examen que una IA pueda contestar por ti. Lo puedes sacar mientras todavía tienes trabajo.</p>
               {pruebas.map(p => (
                 <div key={p.codigo} className="tarjeta text-sm" data-prueba={p.codigo}>
                   <p className="font-semibold">{p.codigo} · {p.titulo}</p>
@@ -131,7 +152,7 @@ export default async function Mapa({ params }) {
                   <p className="mt-1 text-xs" style={{ color: 'var(--color-posible)' }}>Fuente: <a className="liga" href={p.fuente.url} target="_blank" rel="noopener noreferrer">{p.fuente.nombre}</a> · verificado el {p.verificado}</p>
                 </div>
               ))}
-              <p className="text-xs text-neutral-600">Costo: depende del centro evaluador; no lo verificamos para 2026.</p>
+              <p className="text-xs text-neutral-600">Dónde y cuánto: lo hacen centros evaluadores autorizados (CONALEP, ICATs, universidades); el costo cambia según el centro y no lo verificamos para 2026.</p>
             </>}
       </section>
     </div>
