@@ -132,8 +132,8 @@ export default async function Mapa({ params }) {
               <div className="tarjeta text-sm">
                 <p className="font-semibold">Cómo empezar</p>
                 <ol className="list-decimal pl-5">
-                  <li>Pregunta en un centro evaluador autorizado (por ejemplo, el CONALEP o el ICAT de tu ciudad) por el código del certificado: {pruebas.map(p => p.codigo).join(' o ')}.</li>
-                  <li>Pide el costo y la fecha: cambia según el centro. Un centro cobraba MX$4,800 por el EC0305 en 2023 (curso + evaluación + certificado); no verificamos precios de 2026.</li>
+                  <li>Pregunta en un centro evaluador autorizado (por ejemplo, el CONALEP o el ICAT de tu ciudad) por el certificado <b>{pruebas[0].codigo}</b>: es el más parecido a lo que haces hoy.{pruebas.length > 1 && <> Si no lo tienen, pregunta por el {pruebas.slice(1).map(p => p.codigo).join(' o ')}.</>}</li>
+                  <li>Pide el costo y la fecha: cambia según el centro. Solo encontramos un ejemplo: un centro cobraba MX$4,800 por el EC0305 en 2023 (curso + evaluación + certificado). No sabemos si es caro o barato comparado con otros, ni el precio de 2026.</li>
                   <li>Puedes hacerlo mientras todavía tienes trabajo.</li>
                 </ol>
                 <p className="mt-1 text-xs" style={{ color: 'var(--color-posible)' }}>Fuente del precio: <a className="liga" href="https://ceune.unach.mx/images/ECE/preciosdeestandareseceunach2023.pdf" target="_blank" rel="noopener noreferrer">ECE-UNACH, precios de estándares 2023</a></p>
