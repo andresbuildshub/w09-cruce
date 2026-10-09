@@ -34,7 +34,7 @@ test('c) every verified door and origin proof has an https source and an ISO dat
 })
 
 test('d) classifier: whitelist only; input cleaned of digits/emails, 10–400 chars', () => {
-  assert.deepEqual(normalizarClasificacion('{"clave":"3212","razon":"atiendes 5 dudas"}'), { clave: '3212', razon: 'atiendes dudas' })
+  assert.deepEqual(normalizarClasificacion('{"clave":"3212","razon":"atiendes 5 dudas"}'), { clave: '3212', razon: 'Atiendes dudas' })
   assert.equal(normalizarClasificacion('{"clave":"2271","razon":"x"}'), null)
   assert.equal(normalizarClasificacion('no sé'), null)
   assert.equal(limpiar('corto'), null)
